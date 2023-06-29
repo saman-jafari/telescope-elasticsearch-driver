@@ -7,7 +7,8 @@
         "telescope-elasticsearch-driver",
         "telescope",
         "elasticsearch",
-        "elasticsearch-driver"
+        "elasticsearch-driver",
+        "laravel"
     ],
     "homepage": "https://github.com/saman-jafari/telescope-elasticsearch-driver",
     "license": "MIT",

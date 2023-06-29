@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'host' => env('ELASTICSEARCH_HOST', 'elasticsearch:9200'),
-    'username' => env('ELASTICSEARCH_USERNAME', ''),
-    'password' => env('ELASTICSEARCH_PASSWORD', ''),
-    'index' => env('ELASTICSEARCH_INDEX', 'telescope'),
+    'host' => env('TELESCOPE_ELASTICSEARCH_HOST', 'elasticsearch:9200'),
+    'username' => env('TELESCOPE_ELASTICSEARCH_USERNAME', ''),
+    'password' => env('TELESCOPE_ELASTICSEARCH_PASSWORD', ''),
+    'index' => env('TELESCOPE_ELASTICSEARCH_INDEX', 'telescope'),
 ];

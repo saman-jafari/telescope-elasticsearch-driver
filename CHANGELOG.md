@@ -5,3 +5,7 @@ All notable changes to `telescope-elasticsearch-driver` will be documented in th
 ## 1.0.0 - 2023-06-29
 
 - initial release
+
+## 1.0.1 - 2023-06-29
+
+- config name update make more unique for the package 

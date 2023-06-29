@@ -29,11 +29,11 @@ class TelescopeIndex
      */
     public function __construct()
     {
-        $this->index = config('telescope-elasticsearch.index');
+        $this->index = config('telescope-elasticsearch-driver.index');
         try {
             $this->client = ClientBuilder::create()
-                                         ->setHosts([config('telescope-elasticsearch.host')])
-                                         ->setBasicAuthentication(config('telescope-elasticsearch.username'), config('telescope-elasticsearch.password'))
+                                         ->setHosts([config('telescope-elasticsearch-driver.host')])
+                                         ->setBasicAuthentication(config('telescope-elasticsearch-driver.username'), config('telescope-elasticsearch-driver.password'))
                                          ->build();
         } catch (AuthenticationException $e) {
             Log::error('auth failure', ['message' => $e->getMessage()]);

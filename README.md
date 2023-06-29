@@ -30,6 +30,7 @@ example:
 TELESCOPE_ELASTICSEARCH_HOST=https://elasticsearch:9200/
 TELESCOPE_ELASTICSEARCH_USERNAME=elastic
 TELESCOPE_ELASTICSEARCH_PASSWORD=changeme
+TELESCOPE_ELASTICSEARCH_INDEX=telescope_index
 ``` 
 
 if you want you can publish the config file too

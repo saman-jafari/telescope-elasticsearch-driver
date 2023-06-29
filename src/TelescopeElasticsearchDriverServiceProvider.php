@@ -18,7 +18,7 @@ class TelescopeElasticsearchDriverServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('telescope-elasticsearch-driver.php'),
-            ], 'config');
+            ], 'telescope-elasticsearch-driver-config');
         }
     }
 

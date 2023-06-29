@@ -4,8 +4,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/saman-jafari/telescope-elasticsearch-driver.svg?style=flat-square)](https://packagist.org/packages/saman-jafari/telescope-elasticsearch-driver)
 ![GitHub Actions](https://github.com/saman-jafari/telescope-elasticsearch-driver/actions/workflows/main.yml/badge.svg)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
-
+it will allow you to switch from sql database to elasticsearch as driver for your data storage and it will eliminate the deadlock so it makes telescope a ready for production logging system.
 ## Installation
 
 You can install the package via composer:
@@ -17,7 +16,7 @@ composer require saman-jafari/telescope-elasticsearch-driver
 ## Usage
 
 ```php
-// Usage description here
+php artisan telescope-elasticsearch-driver:publish
 ```
 
 ### Testing

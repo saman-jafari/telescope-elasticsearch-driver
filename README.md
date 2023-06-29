@@ -2,7 +2,6 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/saman-jafari/telescope-elasticsearch-driver.svg?style=flat-square)](https://packagist.org/packages/saman-jafari/telescope-elasticsearch-driver)
 [![Total Downloads](https://img.shields.io/packagist/dt/saman-jafari/telescope-elasticsearch-driver.svg?style=flat-square)](https://packagist.org/packages/saman-jafari/telescope-elasticsearch-driver)
-![GitHub Actions](https://github.com/saman-jafari/telescope-elasticsearch-driver/actions/workflows/main.yml/badge.svg)
 
 it will allow you to switch from sql database to elasticsearch as driver for your data storage and it will eliminate the deadlock so it makes telescope a ready for production logging system.
 ## Installation
@@ -16,13 +15,7 @@ composer require saman-jafari/telescope-elasticsearch-driver
 ## Usage
 
 ```php
-php artisan telescope-elasticsearch-driver:publish
-```
-
-### Testing
-
-```bash
-composer test
+php artisan vendor:publish --tag=telescope-elasticsearch-driver-config
 ```
 
 ### Changelog

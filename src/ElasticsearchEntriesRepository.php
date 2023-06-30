@@ -566,11 +566,12 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
      *
      * @return void
      * @throws ClientResponseException
+     * @throws MissingParameterException
      * @throws ServerResponseException
      */
     public function clear(): void
     {
-        $this->telescopeIndex->client->indices()->flush([$this->telescopeIndex->index]);
+        $this->telescopeIndex->client->indices()->delete(['index' => $this->telescopeIndex->index]);
     }
 
     /**

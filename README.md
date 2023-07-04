@@ -1,4 +1,4 @@
-# Very short description of the package
+# Enables you to use Elasticsearch for telescope so it does NOT use relational database
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/saman-jafari/telescope-elasticsearch-driver.svg?style=flat-square)](https://packagist.org/packages/saman-jafari/telescope-elasticsearch-driver)
 [![Total Downloads](https://img.shields.io/packagist/dt/saman-jafari/telescope-elasticsearch-driver.svg?style=flat-square)](https://packagist.org/packages/saman-jafari/telescope-elasticsearch-driver)

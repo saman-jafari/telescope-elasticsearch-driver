@@ -52,9 +52,9 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
     public function find($id): EntryResult
     {
         $entry = $this->telescopeIndex->client->get([
-            'index' => $this->telescopeIndex->index,
-            'id'    => $id,
-        ]);
+                                                        'index' => $this->telescopeIndex->index,
+                                                        'id'    => $id,
+                                                    ]);
 
         if (!$entry) {
             throw new Exception('Entry not found');
@@ -80,8 +80,8 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
             $options->limit = 1000;
         }
         $options->beforeSequence = request()->before;
-        $query = [
-            'from' => (int)$options->beforeSequence,
+        $query                   = [
+            'from'  => (int)$options->beforeSequence,
             'size'  => $options->limit,
             'sort'  => [
                 [
@@ -172,11 +172,12 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
      */
     public function toEntryResult(array $document): EntryResult
     {
-        $entry = $document['_source'] ?? [];
+        $entry           = $document['_source'] ?? [];
         $requestSequence = 50;
         if (request()->before >= 50) {
             $requestSequence = request()->before + $requestSequence;
         }
+
         return new EntryResult(
             $entry['uuid'],
             $requestSequence,
@@ -258,8 +259,8 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
             $exception->content    = $content;
             $exception->familyHash = $exception->familyHash();
             $exception->tags([
-                get_class($exception->exception),
-            ]);
+                                 get_class($exception->exception),
+                             ]);
 
             $entries->push($exception);
 
@@ -398,23 +399,23 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
         foreach ($updates as $update) {
             $params = [
                 'index' => $this->telescopeIndex->index, // Replace with your actual index name
-                'body' => [
+                'body'  => [
                     'query' => [
                         'bool' => [
                             'must' => [
                                 ['term' => ['uuid' => $update->uuid]],
-                                ['term' => ['type' => $update->type]]
-                            ]
-                        ]
+                                ['term' => ['type' => $update->type]],
+                            ],
+                        ],
                     ],
-                    'size' => 1
-                ]
+                    'size'  => 1,
+                ],
             ];
-            $entry = $this->telescopeIndex->client->search($params);
-            $collectEntries = collect($entry->asArray()['hits']['hits'][0])->toArray();
-            if (!$collectEntries) {
+            $entry  = $this->telescopeIndex->client->search($params);
+            if (!isset($entry->asArray()['hits']) && !isset($entry->asArray()['hits']['hits']) && !isset($entry->asArray()['hits']['hits'][0])) {
                 continue;
             }
+            $collectEntries = collect($entry->asArray()['hits']['hits'][0])->toArray();
 
             $collectEntries['_source']['content'] = array_merge(
                 $collectEntries['_source']['content'] ?? [],
@@ -536,24 +537,24 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
     {
         $params = [
             'index' => $this->telescopeIndex->index, // Replace with your actual index name
-            'body' => [
+            'body'  => [
                 'query' => [
                     'bool' => [
                         'must' => [
                             [
                                 'range' => [
                                     'created_at' => [
-                                        'lt' => (string)$before
-                                    ]
-                                ]
+                                        'lt' => (string)$before,
+                                    ],
+                                ],
                             ],
                             [
-                                'match_all' => (object)[]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                'match_all' => (object)[],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $response = $this->telescopeIndex->client->deleteByQuery($params);

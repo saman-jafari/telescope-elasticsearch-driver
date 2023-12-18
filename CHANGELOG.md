@@ -2,6 +2,10 @@
 
 All notable changes to `telescope-elasticsearch-driver` will be documented in this file
 
+## 1.0.5 - 2023-12-18
+
+- Update error handling in Elasticsearch retrieval
+
 ## 1.0.4 - 2023-08-17
 
 - check if entry is returned from elasticsearch before doing some actions

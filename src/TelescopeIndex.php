@@ -32,9 +32,9 @@ class TelescopeIndex
         $this->index = config('telescope-elasticsearch-driver.index');
         try {
             $this->client = ClientBuilder::create()
-                                         ->setHosts([config('telescope-elasticsearch-driver.host')])
-                                         ->setBasicAuthentication(config('telescope-elasticsearch-driver.username'), config('telescope-elasticsearch-driver.password'))
-                                         ->build();
+                ->setHosts([config('telescope-elasticsearch-driver.host')])
+                ->setBasicAuthentication(config('telescope-elasticsearch-driver.username'), config('telescope-elasticsearch-driver.password'))
+                ->build();
         } catch (AuthenticationException $e) {
             Log::error('auth failure', ['message' => $e->getMessage()]);
         }
@@ -60,8 +60,8 @@ class TelescopeIndex
                         '_source'    => [
                             'enabled' => true,
                         ],
-                        'properties' => $this->properties()
-                    ]
+                        'properties' => $this->properties(),
+                    ],
                 ],
             ]);
         } catch (ClientResponseException $e) {

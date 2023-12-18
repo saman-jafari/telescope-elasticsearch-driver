@@ -52,9 +52,9 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
     public function find($id): EntryResult
     {
         $entry = $this->telescopeIndex->client->get([
-                                                        'index' => $this->telescopeIndex->index,
-                                                        'id'    => $id,
-                                                    ]);
+            'index' => $this->telescopeIndex->index,
+            'id'    => $id,
+        ]);
 
         if (!$entry) {
             throw new Exception('Entry not found');
@@ -259,8 +259,8 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
             $exception->content    = $content;
             $exception->familyHash = $exception->familyHash();
             $exception->tags([
-                                 get_class($exception->exception),
-                             ]);
+                get_class($exception->exception),
+            ]);
 
             $entries->push($exception);
 
@@ -412,7 +412,12 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
                 ],
             ];
             $entry  = $this->telescopeIndex->client->search($params);
-            if (!isset($entry->asArray()['hits']) && !isset($entry->asArray()['hits']['hits']) && !isset($entry->asArray()['hits']['hits'][0])) {
+            if (
+                !isset($entry->asArray()['hits'])
+                && !isset($entry->asArray()['hits']['hits'])
+                && !isset($entry->asArray()['hits']['hits'][0])
+                && (gettype($entry->asArray()['hits']['hits'][0]) !== 'array')
+            ) {
                 continue;
             }
             $collectEntries = collect($entry->asArray()['hits']['hits'][0])->toArray();

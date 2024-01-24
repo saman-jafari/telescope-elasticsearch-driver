@@ -411,16 +411,15 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
                     'size'  => 1,
                 ],
             ];
-            $entry  = $this->telescopeIndex->client->search($params);
-            if (
-                !isset($entry->asArray()['hits'])
-                && !isset($entry->asArray()['hits']['hits'])
-                && !isset($entry->asArray()['hits']['hits'][0])
-                && (gettype($entry->asArray()['hits']['hits'][0]) !== 'array')
+            $entry  = $this->telescopeIndex->client->search($params)->asArray();
+
+            if ( !isset($entry['hits']['hits'][0])
+                || (gettype($entry['hits']['hits'][0]) !== 'array')
             ) {
                 continue;
             }
-            $collectEntries = collect($entry->asArray()['hits']['hits'][0])->toArray();
+
+            $collectEntries = collect($entry['hits']['hits'][0])->toArray();
 
             $collectEntries['_source']['content'] = array_merge(
                 $collectEntries['_source']['content'] ?? [],

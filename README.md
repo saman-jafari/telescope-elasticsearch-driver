@@ -7,7 +7,7 @@ it will allow you to switch from sql database to elasticsearch as driver for you
 ## Prerequisite
 
 - elasticsearch
-- telescope 4.15 or higher
+- telescope 5.0 or higher
 
 ## Installation
 

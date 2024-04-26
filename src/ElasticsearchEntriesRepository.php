@@ -531,13 +531,14 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
      * Prune all of the entries older than the given date.
      *
      * @param DateTimeInterface $before
+     * @param bool              $keepExceptions
      *
      * @return int
      * @throws ClientResponseException
-     * @throws ServerResponseException
      * @throws MissingParameterException
+     * @throws ServerResponseException
      */
-    public function prune(DateTimeInterface $before): int
+    public function prune(DateTimeInterface $before, $keepExceptions): int
     {
         $params = [
             'index' => $this->telescopeIndex->index, // Replace with your actual index name

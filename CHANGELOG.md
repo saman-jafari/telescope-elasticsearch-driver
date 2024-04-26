@@ -2,6 +2,10 @@
 
 All notable changes to `telescope-elasticsearch-driver` will be documented in this file
 
+## 2.0.0 - 2024-04-26
+
+- Update package version to support telescope 5 and above and enhance prune function for the same reason
+
 ## 1.0.6 - 2024-01-24
 
 - Update error handling in Elasticsearch retrieval

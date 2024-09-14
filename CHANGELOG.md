@@ -2,6 +2,10 @@
 
 All notable changes to `telescope-elasticsearch-driver` will be documented in this file
 
+## 2.0.1 - 2024-09-14
+
+- Fixed Deprecated Error for creating dynamic properties for family hash
+
 ## 2.0.0 - 2024-04-26
 
 - Update package version to support telescope 5 and above and enhance prune function for the same reason

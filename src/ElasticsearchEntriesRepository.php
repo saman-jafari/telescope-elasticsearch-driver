@@ -257,7 +257,6 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
             );
 
             $exception->content    = $content;
-            $exception->familyHash = $exception->familyHash();
             $exception->tags([
                 get_class($exception->exception),
             ]);
@@ -328,7 +327,7 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
                 ],
             ];
             $data                            = $entry->toArray();
-            $data['family_hash']             = $entry->familyHash ?? null;
+            $data['family_hash']             = $entry->familyHash ?: ($entry->familyHash() ?? null);
             $data['tags']                    = $this->formatTags($entry->tags);
             $data['should_display_on_index'] = property_exists($entry, 'displayOnIndex')
                 ? $entry->displayOnIndex

@@ -2,6 +2,10 @@
 
 All notable changes to `telescope-elasticsearch-driver` will be documented in this file
 
+## 2.0.2 - 2024-09-14
+
+- Fixed Deprecated Error for creating dynamic properties for family hash in toIncomingEntry method
+
 ## 2.0.1 - 2024-09-14
 
 - Fixed Deprecated Error for creating dynamic properties for family hash

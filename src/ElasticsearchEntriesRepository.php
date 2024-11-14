@@ -256,7 +256,7 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
                 })
             );
 
-            $exception->content    = $content;
+            $exception->content = $content;
             $exception->tags([
                 get_class($exception->exception),
             ]);
@@ -288,12 +288,12 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
         $data = $document['_source'] ?? [];
 
         return tap(IncomingEntry::make($data['content']), function ($entry) use ($data) {
-            $entry->uuid        = $data['uuid'];
-            $entry->batchId     = $data['batch_id'];
-            $entry->type        = $data['type'];
-            $entry->family_hash = $data['family_hash'] ?? null;
-            $entry->recordedAt  = Carbon::parse($data['created_at']);
-            $entry->tags        = Arr::pluck($data['tags'], 'raw');
+            $entry->uuid       = $data['uuid'];
+            $entry->batchId    = $data['batch_id'];
+            $entry->type       = $data['type'];
+            $entry->familyHash = $data['family_hash'] ?? null;
+            $entry->recordedAt = Carbon::parse($data['created_at']);
+            $entry->tags       = Arr::pluck($data['tags'], 'raw');
 
             if (!empty($data['content']['user'])) {
                 $entry->user = $data['content']['user'];
@@ -412,7 +412,7 @@ class ElasticsearchEntriesRepository implements EntriesRepository, ClearableRepo
             ];
             $entry  = $this->telescopeIndex->client->search($params)->asArray();
 
-            if ( !isset($entry['hits']['hits'][0])
+            if (!isset($entry['hits']['hits'][0])
                 || (gettype($entry['hits']['hits'][0]) !== 'array')
             ) {
                 continue;

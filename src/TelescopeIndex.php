@@ -31,10 +31,26 @@ class TelescopeIndex
     {
         $this->index = config('telescope-elasticsearch-driver.index');
         try {
-            $this->client = ClientBuilder::create()
+            $builder = ClientBuilder::create()
                 ->setHosts([config('telescope-elasticsearch-driver.host')])
-                ->setBasicAuthentication(config('telescope-elasticsearch-driver.username'), config('telescope-elasticsearch-driver.password'))
-                ->build();
+                ->setBasicAuthentication(
+                    config('telescope-elasticsearch-driver.username'),
+                    config('telescope-elasticsearch-driver.password')
+                );
+
+            $sslVerification = config('telescope-elasticsearch-driver.ssl.ssl_verification');
+            $builder->setSSLVerification($sslVerification);
+
+            $sslOptions = collect(config('telescope-elasticsearch-driver.ssl'))
+                ->except('ssl_verification')
+                ->filter()
+                ->toArray();
+
+            if (!empty($sslOptions)) {
+                $builder->setHttpClientOptions($sslOptions);
+            }
+
+            $this->client = $builder->build();
         } catch (AuthenticationException $e) {
             Log::error('auth failure', ['message' => $e->getMessage()]);
         }

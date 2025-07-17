@@ -29,7 +29,7 @@ class TelescopeIndex
      */
     public function __construct()
     {
-        $this->index = config('telescope-elasticsearch-driver.index');
+        $this->index = $this->generateIndexName();
         try {
             $this->client = ClientBuilder::create()
                 ->setHosts([config('telescope-elasticsearch-driver.host')])
@@ -155,5 +155,18 @@ class TelescopeIndex
         } catch (ServerResponseException $e) {
             Log::error('network error like NoNodeAvailableException', ['message' => $e->getMessage()]);
         }
+    }
+
+    protected function generateIndexName(): string
+    {
+        $base = config('telescope-elasticsearch-driver.index');
+        $format = config('telescope-elasticsearch-driver.index_suffix_format');
+
+        if ($format) {
+            $suffix = now()->format($format);
+            return "{$base}-{$suffix}";
+        }
+
+        return $base;
     }
 }
